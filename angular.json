@@ -27,6 +27,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ag-grid/dist/styles/ag-grid.css",
+              "node_modules/ag-grid/dist/styles/ag-theme-balham.css",              
               "src/styles.scss"
             ],
             "scripts": []
