@@ -4,18 +4,26 @@
 </div>
 <div class="timeline">
     <table>
-        <tr *ngFor="let timeSlot of logsService.timeSlots" class="time-slot">
-            <td>{{timeSlot.time.toISOString()}}</td>
-            <td *ngFor="let thread of getThreads(timeSlot)" class="log-msg">
-                {{thread}}
+        <tr>
+            <th>Time</th>
+            <th *ngFor="let thread of logsService.getThreads()" class="log-msg">
+                {{thread.threadId}}
+            </th>
+        </tr>
+        <tr *ngFor="let timeSlot of logsService.timeSlots" class="time-slot" [class.selected]="selectedTimeSlotTime == timeSlot.time.valueOf() && selectedThreadId == ''">
+            <td (click)="selectTimeSlot(timeSlot)">
+                {{timeSlot.time.format("HH:mm:ss.SSS")}}
+            </td>
+            <td *ngFor="let thread of logsService.getThreadsForTimeSlot(timeSlot)" (click)="selectTimeSlotThread(timeSlot, thread)" class="log-msg" [class.selected]="selectedTimeSlotTime == timeSlot.time.valueOf() && selectedThreadId == logsService.threadIds[thread.threadName].threadId">
+                {{thread.txt}}
             </td>
         </tr>
     </table>
 </div>
 <div class="logs">
-    <div *ngFor="let timeSlot of logsService.timeSlots" class="time-slot">
-        <div *ngFor="let log of timeSlot.logs" class="log-msg">
-            {{log.time.toISOString()}}|{{log.threadName}}|{{log.msg}}
+    <div *ngFor="let timeSlot of logsService.timeSlots" class="time-slot" [class.selected]="selectedTimeSlotTime == timeSlot.time.valueOf() && selectedThreadId == ''">
+        <div *ngFor="let log of timeSlot.logs" class="log-msg" [class.selected]="selectedTimeSlotTime == timeSlot.time.valueOf() && selectedThreadId == logsService.threadIds[log.threadName].threadId">
+            {{log.time.format("HH:mm:ss.SSS")}}|{{log.threadName}}|{{log.msg}}
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
+import * as base58 from 'base58';
 
 export interface Log {
   time: moment.Moment;
@@ -10,6 +11,11 @@ export interface TimeSlot {
   time: moment.Moment;
   logs: Log[];
   threads: {[threadName: string]: Log[]};
+}
+export interface Thread {
+  threadName: string;
+  threadId: string;
+  txt: string;
 }
 
 @Injectable({
@@ -26,6 +32,7 @@ export class LogsService {
   private timeSlotIntervalMs = 100;
   public logs: Log[] = [];
   public threads: Set<string> = new Set();
+  public threadIds: {[threadName: string]: Thread} = {};
   public timeSlots: TimeSlot[] = [];
 
   public loadLogFile(fileContents: string) {
@@ -71,7 +78,29 @@ export class LogsService {
       this.timeSlots.push(currentTimeSlot);
       currentTimeSlot = {time: moment(currentTimeSlot.time.valueOf() + this.timeSlotIntervalMs), threads: {}, logs: []};
     }
+
+    let idx = 0;
+    for (let tn of this.threads) {
+      this.threadIds[tn] = {threadName: tn, threadId: base58.encode(idx++), txt: ''};
+    }
   }
+
+  getThreads(): Thread[] {
+    let ret: Thread[] = [];
+    for (let threadName of Object.keys(this.threadIds)) {
+      ret.push(this.threadIds[threadName]);
+    }
+    return ret;
+  }  
+
+  getThreadsForTimeSlot(timeSlot: TimeSlot): Thread[] {
+    let ret: Thread[] = [];
+    for (let threadName of Object.keys(this.threadIds)) {
+      let txt = timeSlot.threads[threadName] ? timeSlot.threads[threadName].length + '' : '';
+      ret.push({...this.threadIds[threadName], txt: txt});
+    }
+    return ret;
+  }  
 
   public TEST_LOG_FILE = `
   bla bla

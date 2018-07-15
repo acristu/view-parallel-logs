@@ -14,7 +14,7 @@ body {
     font-size: 80%;
     font-family: monospace;
     width: 25%;
-    height: 85%;
+    height: 75%;
 }
 .logs {
     position: fixed;
@@ -22,6 +22,12 @@ body {
     right: 0;
     overflow: scroll;
     font-family: monospace;
-    height: 85%;
+    height: 75%;
     width: 75%;
+}
+table, td, th {
+    border: 1px solid lightgrey;
+}
+.selected {
+    background-color: aqua;
 }
