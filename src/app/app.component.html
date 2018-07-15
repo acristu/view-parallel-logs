@@ -1,25 +1,21 @@
-<header>
-    <textarea (change)="parseLogs" [(ngModel)]="logs" rows="2" cols="80" id="logs">
-    </textarea>
-</header>
-<div class="container logs">
-    <div class="row">
-        <div class="col-8 logs">
-            <div *ngFor="let timeSlot of logsService.timeSlots" class="time-slot">
-                <div *ngFor="let log of timeSlot.logs" class="log-msg">
-                    {{log.time.toISOString()}}|{{log.threadName}}|{{log.msg}}
-                </div>
-            </div>
-        </div>
-        <div class="col-4 timeline">
-            <table>
-                <tr *ngFor="let timeSlot of logsService.timeSlots" class="time-slot">
-                    <td>{{timeSlot.time.toISOString()}}</td>
-                    <td *ngFor="let thread of getThreads(timeSlot)" class="log-msg">
-                        {{thread}}
-                    </td>
-                </tr>
-            </table>
+<div class="input">
+    <textarea [(ngModel)]="logs" rows="2" cols="80">
+            </textarea>
+</div>
+<div class="timeline">
+    <table>
+        <tr *ngFor="let timeSlot of logsService.timeSlots" class="time-slot">
+            <td>{{timeSlot.time.toISOString()}}</td>
+            <td *ngFor="let thread of getThreads(timeSlot)" class="log-msg">
+                {{thread}}
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="logs">
+    <div *ngFor="let timeSlot of logsService.timeSlots" class="time-slot">
+        <div *ngFor="let log of timeSlot.logs" class="log-msg">
+            {{log.time.toISOString()}}|{{log.threadName}}|{{log.msg}}
         </div>
     </div>
 </div>

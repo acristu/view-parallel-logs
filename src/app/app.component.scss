@@ -1,4 +1,27 @@
-.logs {
-    // font-size: 90%;
+body {
+    overflow: scroll;
+}
+.input {
+    position: fixed;
+    top: 0;
+    height: 15%;
+}
+.timeline {
+    position: fixed;
+    margin-top: 15%;
+    left: 0;
+    overflow: scroll;
+    font-size: 80%;
     font-family: monospace;
+    width: 25%;
+    height: 85%;
+}
+.logs {
+    position: fixed;
+    margin-top: 15%;
+    right: 0;
+    overflow: scroll;
+    font-family: monospace;
+    height: 85%;
+    width: 75%;
 }
