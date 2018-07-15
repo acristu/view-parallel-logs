@@ -1,6 +1,6 @@
-# ParallelLogsViewer
+# View Parallel Logs
 
-ParallelLogsViewer is a very simple tool that makes it easy to visualize and navigate multi-threaded and multi-process logs.
+This is a very simple tool that makes it easy to visualize and navigate multi-threaded and multi-process logs.
 
 Features:
 

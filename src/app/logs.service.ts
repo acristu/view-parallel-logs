@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-interface Log {
+export interface Log {
   time: moment.Moment;
   threadName: string;
   msg: string;
 }
-interface TimeSlot {
+export interface TimeSlot {
   time: moment.Moment;
   logs: Log[];
   threads: {[threadName: string]: Log[]};
@@ -25,12 +25,12 @@ export class LogsService {
 
   private timeSlotIntervalMs = 100;
   public logs: Log[] = [];
-  public threads = {};
+  public threads: Set<string> = new Set();
   public timeSlots: TimeSlot[] = [];
 
   public loadLogFile(fileContents: string) {
     this.logs = [];
-    this.threads = [];
+    this.threads = new Set();
     for (let line of fileContents.split(/\n/)) {
       this.readLine(line);
     }
@@ -44,7 +44,7 @@ export class LogsService {
       msg = fields.slice(this.msgFieldStart).join('|');
     if (time.isValid() && threadName != null) {
       this.logs.push({ time, threadName, msg });
-      if (!this.threads[threadName]) this.threads[threadName] = Object.keys(this.threads).length;
+      this.threads.add(threadName);
     }
   }
 
