@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LogsService } from './logs.service';
 
 @Component({
   selector: 'vpl-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'vpl';
+  title = 'app';
+
+  constructor(private logsService: LogsService) {
+    logsService.loadLogFile(logsService.TEST_LOG_FILE);
+  }
 }
