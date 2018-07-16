@@ -13,7 +13,9 @@ export class TimelineComponent {
     {
       field: "time",
       valueFormatter: params => params.value.format("HH:mm:ss.SSS"),
-      width: 100
+      width: 100,
+      cellStyle: {'font-size': '70%', 'padding': '0', 'line-height': '10px'},
+      pinned: "left",
     }
   ] as ColDef[]).concat(Array.from(this.logsService.threads).map(t => {
     let ret: ColDef = {
@@ -22,6 +24,7 @@ export class TimelineComponent {
         return (params.data.threads[t] || []).length;
       },
       width: 20,
+      cellStyle: {'font-size': '70%', 'padding': '0', 'line-height': '10px'},
     };
     return ret;
   }));

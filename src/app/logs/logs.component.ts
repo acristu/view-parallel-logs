@@ -16,14 +16,17 @@ export class LogsComponent {
       field: "time",
       valueFormatter: params => params.value.format("HH:mm:ss.SSS"),
       width: 100,
+      cellStyle: {'font-size': '95%', 'padding': '0', 'line-height': '20px'},
     },
     {
       field: "threadName",
-      width: 100
+      width: 100,
+      cellStyle: {'font-size': '95%', 'padding': '0', 'line-height': '20px'},
     },
     {
       field: "msg",
-      width: 400
+      width: 400,
+      cellStyle: {'font-size': '95%', 'padding': '0', 'line-height': '20px'},
     },
   ];
 

@@ -3,6 +3,8 @@
     style="width: 100%; height: 96%;"
     id="timelineGrid"
     class="ag-theme-balham"
+    [rowHeight]="12"
+    [autoSizePadding]="0"
     [rowData]="logsService.timeSlots"
     [enableColResize]="true"
     [columnDefs]="columnDefs"
